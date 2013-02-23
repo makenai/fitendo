@@ -21,4 +21,9 @@ class WelcomeController < ApplicationController
     redirect_to results_url
   end
 
+  def logout
+    reset_session
+    redirect_to root_url
+  end
+
 end
