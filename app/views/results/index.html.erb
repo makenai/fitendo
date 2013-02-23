@@ -24,9 +24,9 @@
 
 	    function onYouTubePlayerReady(playerId) {
 	    	var titleTime = 9,
-	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400),
+	    		stepRatio = Math.floor(<%= @starting_steps %> / 400),
 	    		startTime = titleTime + stepRatio;
-	    		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
+	    		endTime = Math.floor(titleTime + (<%= @ending_steps %> / 400));
 
 	    	ytPlayer.seekTo(startTime);
 	    	ytPlayer.pauseVideo();
@@ -36,6 +36,7 @@
 	    		ytPlayer.playVideo();
 	    		clearInterval(window.checker);
 	    		window.checker = setInterval(listenForTime, 41);
+	    		doCountdown();
 	    		var buttontext = e.currentTarget.text;
 	    		if (buttontext == "Start progress!") {
 	    			console.log("yes");
@@ -56,6 +57,31 @@
 	    		console.log('endtime!');
 	    	}
 	    }
+
+	    function doCountdown() {
+	    	var count = 0;
+	    	var stepRate = count / <%= @starting_steps %>;
+			var counter = setInterval(timer, stepRate); //1000 will  run it every 1 second
+			var totalSteps = <%= @ending_steps %> - <%= @starting_steps %>;
+
+			var count2 = <%= @starting_steps %>;
+
+			function timer()
+			{
+			  count = count + 1;
+			  count2 = count2 + 1;
+			  if (count >= totalSteps)
+			  {
+			     clearInterval(counter);
+			     //counter ended, do something here
+			     return;
+			  }
+
+			  document.getElementById("timer1").innerHTML = count + " steps today";
+			  document.getElementById("timer2").innerHTML = count2 + " steps total";
+			}
+	    }
+	    
 
 	</script>
 
@@ -81,6 +107,9 @@
   		Steps today: <%= @ending_steps %>
 
   		<p><a id="progressbtn" href="">Start progress!</a></p>
+
+  		<p id="timer1"></p>
+  		<p id="timer2"></p>
 
 	</div>
 
