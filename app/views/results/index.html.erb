@@ -8,30 +8,86 @@
  |__|   |__|J_____F J______F |__L  J__| J____,__F J______F 
 
 -->
-
-<div id="userInfo">
-  <%= image_tag @user['avatar'] %><br />
-  <%= @user['displayName'] %>
-</div>
                                                            
 <% content_for :header do %>
 	<script type="text/javascript">
 	    // The video to load.
-	    var video_id = "7qirrV8w5SQ"
+	    var video_id = "z9q0rBssKag"
 	    // Lets Flash from another domain call JavaScript
-	    var params = { allowScriptAccess: "always" };
+	    var params = { allowScriptAccess: "always", wmode: "transparent" };
 	    // The element id of the Flash embed
 	    var atts = { id: "ytPlayer" };
 	    var settings = {};
 	    // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
-	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&start=10&end=13", "videoDiv", "1000", "600", "9", null, null, params, atts);
-	    
+	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0", "videoDiv", "560", "460", "9", null, null, params, atts);
+
+	    function onYouTubePlayerReady(playerId) {
+	    	var startTime = 10;
+	    	ytPlayer.seekTo(startTime);
+	    	ytPlayer.pauseVideo();
+	    	$('#progressbtn').click(function(e) {
+	    		e.preventDefault();
+	    		ytPlayer.playVideo();
+	    		window.checker = setInterval(listenForTime, 41);
+	    		var buttontext = e.currentTarget.text;
+	    		console.log(buttontext);
+	    		if (buttontext == "Start progress!") {
+	    			console.log("yes");
+	    			$(e.currentTarget).html("Play again?");
+	    		} else {
+	    			$(e.currentTarget).html("Start progress!");
+	    		}
+	    	});
+	    }
+
+	    listenForTime = function() {
+	    	var currentTime = parseInt(ytPlayer.getCurrentTime(), 10);
+	    	var endTime = 13;	
+	    	console.log(currentTime, endTime);
+	    	if (currentTime === endTime) {
+	    		ytPlayer.pauseVideo();
+	    		clearInterval(window.checker);
+	    		console.log('endtime!');
+	    	}
+	    }
+
 	</script>
+
+
 <% end %>
 
-<div id="wrapper">
-	<div id="videoDiv">
-		<h1>Alternative content</h1>
-		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+<div id="mainwrapper">
+
+	<div id="tvwrapper">
+		<div id="tv">
+			<img src="/assets/tv.png"/>
+		</div>
+		<div id="videoDiv">
+			<h1>Alternative content</h1>
+			<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+		</div>
 	</div>
+
+	<div id="userInfo">
+		<h2><%= @user['displayName'] %></h2>
+  		<%= image_tag @user['avatar'] %><br />
+  		Starting steps: 0<br/>
+  		Steps today: 9,256<br/>
+
+  		<p><a id="progressbtn" href="">Start progress!</a></p>
+
+	</div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+

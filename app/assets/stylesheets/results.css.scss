@@ -5,6 +5,39 @@
 
 body {
 	background-color: #ffffff;
-	color: #000000;
+	color: #333333;
+	font-family: 'Helvetica', sans-serif;
 }
 
+#mainwrapper {
+	height:auto;
+}
+
+#tvwrapper {
+	position:relative;
+	float:left;
+	display:inline;
+	width:900px;
+	height:500px;
+	margin-right:50px;
+}
+
+#tv {
+	position:absolute;
+	z-index:999;
+	left:0px;
+}
+
+#ytPlayer {
+	position:absolute;
+	z-index:1;
+	left:85px;
+	top:90px;
+}
+	
+#userInfo {
+	padding:30px 20px 20px 20px;
+	width: 200px;
+	display:inline;
+	float:left;
+}
