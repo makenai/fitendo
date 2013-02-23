@@ -24,9 +24,9 @@
 
 	    function onYouTubePlayerReady(playerId) {
 	    	var titleTime = 9,
-	    		stepRatio = Math.floor(<%= @starting_steps %> / 400),
+	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400),
 	    		startTime = titleTime + stepRatio;
-	    		endTime = Math.floor(titleTime + (<%= @ending_steps %> / 400));
+	    		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
 
 	    	ytPlayer.seekTo(startTime);
 	    	ytPlayer.pauseVideo();
