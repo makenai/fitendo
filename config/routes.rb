@@ -52,6 +52,7 @@ Fitendo::Application.routes.draw do
   match '/auth' => 'welcome#auth'
   match '/callback' => 'welcome#callback'
   match '/results' => 'results#index'
+  match '/logout' => 'welcome#logout'
 
   # See how all your routes lay out with "rake routes"
 

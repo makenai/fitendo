@@ -8,6 +8,7 @@
  |__|   |__|J_____F J______F |__L  J__| J____,__F J______F 
 
 -->
+
                                                            
 <% content_for :header do %>
 	<script type="text/javascript">
@@ -71,8 +72,8 @@
 	<div id="userInfo">
 		<h2><%= @user['displayName'] %></h2>
   		<%= image_tag @user['avatar'] %><br />
-  		Starting steps: 0<br/>
-  		Steps today: 9,256<br/>
+  		Starting steps: <%= @starting_steps %><<br/>
+  		Steps today: <%= @ending_steps %>
 
   		<p><a id="progressbtn" href="">Start progress!</a></p>
 
