@@ -113,6 +113,20 @@
 
 	</div>
 
+	<div id="calendar">
+
+		<% if @previous_day %>
+			<a href="/results?date=<%= @previous_day.strftime('%Y-%m-%d') %>"><%= @previous_day.strftime("%A, %B #{@previous_day.day.ordinalize}") %> &laquo;</a>
+		<% end %>
+
+		<b><%= @date.strftime("%A, %B #{@date.day.ordinalize}") %></b>
+
+		<% if @next_day %>
+			<a href="/results?date=<%= @next_day.strftime('%Y-%m-%d') %>"><%= @next_day.strftime("%A, %B #{@next_day.day.ordinalize}") %> &raquo;</a>
+		<% end %>
+
+	</div>
+
 </div>
 
 
