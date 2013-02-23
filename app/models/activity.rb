@@ -26,4 +26,16 @@ class Activity < ActiveRecord::Base
     end
   end
 
+  def self.previous_day( user_id, date )
+    if last = self.where('user_id = ? AND for_date < ?', user_id, date ).order('for_date DESC').first
+      last.for_date
+    end
+  end
+
+  def self.next_day( user_id, date )
+    if last = self.where('user_id = ? AND for_date > ?', user_id, date ).order('for_date ASC').first
+      last.for_date
+    end
+  end
+
 end
