@@ -54,7 +54,7 @@
 	    		ytPlayer.pauseVideo();
 	    		clearInterval(checker);
 	    		currentTime = 0;
-	    		console.log('endtime!');
+	    		//console.log('endtime!');
 	    	}
 	    }
 
@@ -70,10 +70,11 @@
 			{
 			  count = count + 1;
 			  count2 = count2 + 1;
+			  console.log(count, totalSteps);
 			  if (count >= totalSteps)
 			  {
 			     clearInterval(counter);
-			     //counter ended, do something here
+			     console.log("clearing");
 			     return;
 			  }
 
