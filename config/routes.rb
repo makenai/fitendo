@@ -51,6 +51,7 @@ Fitendo::Application.routes.draw do
   root :to => 'welcome#index'
   match '/auth' => 'welcome#auth'
   match '/callback' => 'welcome#callback'
+  match '/results' => 'results#index'
 
   # See how all your routes lay out with "rake routes"
 
