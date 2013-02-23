@@ -23,7 +23,11 @@
 	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0", "videoDiv", "560", "460", "9", null, null, params, atts);
 
 	    function onYouTubePlayerReady(playerId) {
-	    	var startTime = 10;
+	    	var titleTime = 9,
+	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400),
+	    		startTime = titleTime + stepRatio;
+	    		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
+
 	    	ytPlayer.seekTo(startTime);
 	    	ytPlayer.pauseVideo();
 	    	$('#progressbtn').click(function(e) {
@@ -44,11 +48,10 @@
 
 	    listenForTime = function() {
 	    	var currentTime = parseInt(ytPlayer.getCurrentTime(), 10);
-	    	var endTime = 13;	
 	    	console.log(currentTime, endTime);
 	    	if (currentTime === endTime) {
 	    		ytPlayer.pauseVideo();
-	    		clearInterval(window.checker);
+	    		clearInterval(checker);
 	    		currentTime = 0;
 	    		console.log('endtime!');
 	    	}
