@@ -8,10 +8,14 @@
  |__|   |__|J_____F J______F |__L  J__| J____,__F J______F 
 
 -->
+
+<div id="userInfo">
+  <%= image_tag @user['avatar'] %><br />
+  <%= @user['displayName'] %>
+</div>
                                                            
 <% content_for :header do %>
 	<script type="text/javascript">
-
 	    // The video to load.
 	    var video_id = "7qirrV8w5SQ"
 	    // Lets Flash from another domain call JavaScript
