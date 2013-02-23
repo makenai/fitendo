@@ -9,13 +9,23 @@
 
 -->
                                                            
+<% content_for :header do %>
+	<script type="text/javascript">
 
-<div id="myContent">
+	    // The video to load.
+	    var video_id = "7qirrV8w5SQ"
+	    // Lets Flash from another domain call JavaScript
+	    var params = { allowScriptAccess: "always" };
+	    // The element id of the Flash embed
+	    var atts = { id: "ytPlayer" };
+	    // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
+	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1", 
+	                       "videoDiv", "480", "295", "9", null, null, params, atts);
+	    
+	</script>
+<% end %>
+
+<div id="videoDiv">
 	<h1>Alternative content</h1>
 	<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
 </div>
-
-
-<script type="text/javascript">
-swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
-</script>
