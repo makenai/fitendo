@@ -30,14 +30,13 @@
 	    		e.preventDefault();
 	    		ytPlayer.seekTo(startTime);
 	    		ytPlayer.playVideo();
+	    		clearInterval(window.checker);
 	    		window.checker = setInterval(listenForTime, 41);
 	    		var buttontext = e.currentTarget.text;
-	    		console.log(buttontext);
 	    		if (buttontext == "Start progress!") {
 	    			console.log("yes");
 	    			$(e.currentTarget).html("Play again?");
 	    		} else {
-	    			clearInterval(window.checker);
 	    			currentTime = 0;
 	    		}
 	    	});
