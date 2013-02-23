@@ -28,6 +28,7 @@
 	    	ytPlayer.pauseVideo();
 	    	$('#progressbtn').click(function(e) {
 	    		e.preventDefault();
+	    		ytPlayer.seekTo(startTime);
 	    		ytPlayer.playVideo();
 	    		window.checker = setInterval(listenForTime, 41);
 	    		var buttontext = e.currentTarget.text;
@@ -36,7 +37,8 @@
 	    			console.log("yes");
 	    			$(e.currentTarget).html("Play again?");
 	    		} else {
-	    			$(e.currentTarget).html("Start progress!");
+	    			clearInterval(window.checker);
+	    			currentTime = 0;
 	    		}
 	    	});
 	    }
@@ -48,6 +50,7 @@
 	    	if (currentTime === endTime) {
 	    		ytPlayer.pauseVideo();
 	    		clearInterval(window.checker);
+	    		currentTime = 0;
 	    		console.log('endtime!');
 	    	}
 	    }
@@ -72,7 +75,7 @@
 	<div id="userInfo">
 		<h2><%= @user['displayName'] %></h2>
   		<%= image_tag @user['avatar'] %><br />
-  		Starting steps: <%= @starting_steps %><<br/>
+  		Starting steps: <%= @starting_steps %><br/>
   		Steps today: <%= @ending_steps %>
 
   		<p><a id="progressbtn" href="">Start progress!</a></p>
