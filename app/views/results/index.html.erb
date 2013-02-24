@@ -60,7 +60,7 @@
 
 	    function doCountdown() {
 	    	var count = 0;
-	    	var stepRate = count / <%= @starting_steps %>;
+	    	var stepRate =  60 / 400;
 			var counter = setInterval(timer, stepRate); //1000 will  run it every 1 second
 			var totalSteps = <%= @ending_steps %> - <%= @starting_steps %>;
 
