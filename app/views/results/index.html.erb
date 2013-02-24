@@ -110,24 +110,26 @@
 
   		<p><a id="progressbtn" href="">Start progress!</a></p>
 
+  		<div id="calendar">
+  			<h3>Choose a day:</h3>
+		<% if @previous_day %>
+			<p><a href="/results?date=<%= @previous_day.strftime('%Y-%m-%d') %>">&laquo; <%= @previous_day.strftime("%A, %B #{@previous_day.day.ordinalize}") %></a></p>
+		<% end %>
+
+		<p><b><%= @date.strftime("%A, %B #{@date.day.ordinalize}") %></b></p>
+
+		<% if @next_day %>
+			<p><a href="/results?date=<%= @next_day.strftime('%Y-%m-%d') %>"><%= @next_day.strftime("%A, %B #{@next_day.day.ordinalize}") %> &raquo;</a></p>
+		<% end %>
+
+	</div>
+
   		<p id="timer11"></p>
   		<p id="timer21"></p>
 
 	</div>
 
-	<div id="calendar">
-
-		<% if @previous_day %>
-			<a href="/results?date=<%= @previous_day.strftime('%Y-%m-%d') %>"><%= @previous_day.strftime("%A, %B #{@previous_day.day.ordinalize}") %> &laquo;</a>
-		<% end %>
-
-		<b><%= @date.strftime("%A, %B #{@date.day.ordinalize}") %></b>
-
-		<% if @next_day %>
-			<a href="/results?date=<%= @next_day.strftime('%Y-%m-%d') %>"><%= @next_day.strftime("%A, %B #{@next_day.day.ordinalize}") %> &raquo;</a>
-		<% end %>
-
-	</div>
+	
 
 </div>
 
