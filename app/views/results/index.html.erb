@@ -105,7 +105,7 @@
 		<h2><%= @user['displayName'] %></h2>
   		<%= image_tag @user['avatar'] %><br />
   		<b>Starting steps:</b> <%= @starting_steps %><br/>
-  		<b>Steps today:</b> <%= @ending_steps %>
+  		<b>Steps today:</b> <%= @activities['summary']['steps'] %> (<a href="/results?date=<%= @date.strftime('%Y-%m-%d') %>&refresh=1">refresh</a>)
 
   		<p><a id="progressbtn" href="">Show Progress! ►</a></p>
 

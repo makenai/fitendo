@@ -4,18 +4,27 @@ class Activity < ActiveRecord::Base
   belongs_to :user
 
   def self.for_user( fitbit, user, date=Date.today )
-    if activity = self.where( :user_id => user['encodedId'], :for_date => date ).first
+    if activity = self.where( 'user_id = ? AND for_date = ? AND updated_at < ?', user['encodedId'], 
+      date, Time.now - 15.minutes ).first
       return JSON.parse( activity.response )
     else
-      activities = fitbit.activities_on_date( date )
-      Activity.create(
-        :user_id => user['encodedId'],
-        :response => activities.to_json,
-        :for_date => date,
-        :cumulative_steps => self.cumulative_steps( user['encodedId'], date ) + activities['summary']['steps'].to_i
-      )
-      return activities
+      self.update_activity!( fitbit, user, date )
     end
+  rescue
+    self.update_activity!( fitbit, user, date )
+  end
+
+  def self.update_activity!( fitbit, user, date )
+    activities = fitbit.activities_on_date( date )
+    activity = Activity.find_or_initialize_by_user_id_and_for_date(
+      :user_id => user['encodedId'],
+      :for_date => date
+    )
+    activity.update_attributes(
+      :response => activities.to_json,
+      :cumulative_steps => self.cumulative_steps( user['encodedId'], date ) + activities['summary']['steps'].to_i
+    )
+    return activities    
   end
 
   def self.cumulative_steps( user_id, date )
