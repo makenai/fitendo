@@ -43,6 +43,15 @@ body {
 	float:left;
 }
 
+#userInfo a{
+	color:#ff0000;
+	text-decoration: none;
+}
+#userInfo a:hover{
+	
+	text-decoration: underline;
+}
+
 #calendar {
 	clear:both;
 }
