@@ -48,10 +48,23 @@ body {
 	text-decoration: none;
 }
 #userInfo a:hover{
-	
 	text-decoration: underline;
 }
 
 #calendar {
 	clear:both;
 }
+
+a#progressbtn {
+	color: black;
+	font-size: 18px;
+	font-weight: bold;
+	display: inline-block;
+	border: 2px solid black;
+	background-color: #c0c0c0;
+	padding: 5px 10px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;	
+}
+a#progressbtn:hover { text-decoration: none; background-color: #d0d0d0; color: red; border-color: red; }
