@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   belongs_to :user
 
   def self.for_user( fitbit, user, date=Date.today )
-    if activity = self.where( 'user_id = ? AND for_date = ? AND updated_at > ?', user['encodedId'], 
+    if activity = self.where( 'user_id = ? AND for_date = ? AND updated_at < ?', user['encodedId'], 
       date, Time.now - 30.minutes ).first
       return JSON.parse( activity.response )
     else
