@@ -49,7 +49,7 @@
 
 	    listenForTime = function() {
 	    	var currentTime = parseInt(ytPlayer.getCurrentTime(), 10);
-	    	console.log(currentTime, endTime);
+
 	    	if (currentTime === endTime) {
 	    		ytPlayer.pauseVideo();
 	    		clearInterval(checker);
@@ -60,27 +60,26 @@
 
 	    function doCountdown() {
 	    	var count = 0;
-	    	var stepRate =  60 / 400;
-			var counter = setInterval(timer, stepRate); //1000 will  run it every 1 second
-			var totalSteps = <%= @ending_steps %> - <%= @starting_steps %>;
+	    	var stepRate = 60 / 800;
+				var counter = setInterval(timer, stepRate); //1000 will  run it every 1 second
+				var totalSteps = <%= @ending_steps %> - <%= @starting_steps %>;
 
-			var count2 = <%= @starting_steps %>;
+				var count2 = <%= @starting_steps %>;
 
-			function timer()
-			{
-			  count = count + 1;
-			  count2 = count2 + 1;
-			  console.log(count, totalSteps);
-			  if (count >= totalSteps)
-			  {
-			     clearInterval(counter);
-			     console.log("clearing");
-			     return;
-			  }
-
-			  document.getElementById("timer1").innerHTML = count + " steps today";
-			  document.getElementById("timer2").innerHTML = count2 + " steps total";
-			}
+				function timer()
+				{
+				  count = count + 1;
+				  count2 = count2 + 1;
+				  // console.log(count, totalSteps);
+				  if (count >= totalSteps)
+				  {
+				     clearInterval(counter);
+				     console.log("clearing");
+				     return;
+				  }
+				  document.getElementById("timer1").innerHTML = count + " steps today";
+				  document.getElementById("timer2").innerHTML = count2 + " steps total";
+				}
 	    }
 	    
 
