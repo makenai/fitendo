@@ -38,7 +38,7 @@
 	    		window.checker = setInterval(listenForTime, 41);
 	    		doCountdown();
 	    		var buttontext = e.currentTarget.text;
-	    		if (buttontext == "Start progress!") {
+	    		if (buttontext == "Start!") {
 	    			console.log("yes");
 	    			$(e.currentTarget).html("Play again?");
 	    		} else {
@@ -104,8 +104,8 @@
 		<h1><img src="/assets/fitendo.png" width="300"/></h1>
 		<h2><%= @user['displayName'] %></h2>
   		<%= image_tag @user['avatar'] %><br />
-  		Starting steps: <%= @starting_steps %><br/>
-  		Steps today: <%= @ending_steps %>
+  		<b>Starting steps:</b> <%= @starting_steps %><br/>
+  		<b>Steps today:</b> <%= @ending_steps %>
 
   		<p><a id="progressbtn" href="">Start progress!</a></p>
 
