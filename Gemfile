@@ -11,7 +11,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'mysql'
 end
 
 # Gems used only for assets and not required
