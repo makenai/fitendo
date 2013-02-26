@@ -8,7 +8,9 @@ class ResultsController < ApplicationController
       Activity.update_activity!( @fitbit, @user, @date )
       redirect_to "/results?date=#{@date.strftime('%Y-%m-%d')}"
     end
+    p 'Cat'
     p @user
+    p 'Dog'
     @previous_day = Activity.previous_day( @user['encodedId'], @date )
     @next_day = Activity.next_day( @user['encodedId'], @date )
     @activities = Activity.for_user( @fitbit, @user, @date )

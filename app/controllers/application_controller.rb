@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
         :token           => session[:access_token],
         :secret          => session[:access_secret]
       )
+      p @fitbit
       @user = @fitbit.user_info['user']
       return true
     end
