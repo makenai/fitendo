@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
         :token           => session[:access_token],
         :secret          => session[:access_secret]
       )
-      logger.error @fitbit.inspect
       @user = @fitbit.user_info['user']
-      return true
+      return true if @user
     end
     redirect_to root_url
   end
