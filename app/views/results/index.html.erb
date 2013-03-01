@@ -1,90 +1,133 @@
-<!--
+<!-- -------------------------------------------------------------------------------
+
     ____ __   _                              _             
    / ___JLJ  FJ_      ____     _ ___      ___FJ     ____   
   J |_--'   J  _|    F __ J   J '__ J    F __  L   F __ J  
   |  _|  FJ | |-'   | _____J  | |__| |  | |--| |  | |--| | 
   F |_J J  LF |__-. F L___--. F L  J J  F L__J J  F L__J J 
  J__F   J__L\_____/J\______/FJ__L  J__LJ\____,__LJ\______/F
- |__|   |__|J_____F J______F |__L  J__| J____,__F J______F 
+ |__|   |__|J_____F J______F |__L  J__| J____,__F J______F
 
--->
+
+ Brought to you by @makenai and @suziam 
+ Lovingly created during the first @vegasHack event in downtown Las Vegas 2/23/2013
+ We won red pants, mission accomplished
+
+-------------------------------------------------------------------------------- -->
 
                                                            
 <% content_for :header do %>
-	<script type="text/javascript">
-	    // The video to load.
-	    var video_id = "z9q0rBssKag"
-	    // Lets Flash from another domain call JavaScript
-	    var params = { allowScriptAccess: "always", wmode: "transparent" };
-	    // The element id of the Flash embed
-	    var atts = { id: "ytPlayer" };
-	    var settings = {};
-	    // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
-	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0", "videoDiv", "560", "460", "9", null, null, params, atts);
 
+	<!-- TODO: Move this to an external file as much as possible -->
+	<script type="text/javascript">
+	    // The video to load
+	    var video_id = "z9q0rBssKag",
+	    	// Lets Flash from another domain call JavaScript
+	    	params = { allowScriptAccess: "always", wmode: "transparent" },
+	    	// The element id of the Flash embed
+	    	atts = { id: "ytPlayer" },
+	   		// I was going to neaten up the horrible bunch of parameters below with this object, to come soon.
+	    	settings = {};
+
+	    // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
+	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0", "				videoDiv", "560", "460", "9", null, null, params, atts);
+
+	    // All of the other magic happens here
 	    function onYouTubePlayerReady(playerId) {
 	    	var titleTime = 9,
 	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400),
 	    		startTime = titleTime + stepRatio;
-	    		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
 
+	    	// this needs to be global for now
+    		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
+
+    		// get the video ready and pause it on page load
 	    	ytPlayer.seekTo(startTime);
 	    	ytPlayer.pauseVideo();
+
+	    	// start button event
 	    	$('#progressbtn').click(function(e) {
 	    		e.preventDefault();
+
+	    		// cast the button for use with jQuery lazy wah wah
+	    		var button = $(e.currentTarget);
+
+	    		// seek to the starting time just in case someone is already watching video
 	    		ytPlayer.seekTo(startTime);
+	    		// play video from starting point
 	    		ytPlayer.playVideo();
+
+	    		// stop the end point checker for video, ready for another
 	    		clearInterval(window.checker);
+
+	    		// set up the checker so we know when to stop the video
+	    		// it listens for seconds elapsed
 	    		window.checker = setInterval(listenForTime, 41);
+
+	    		// start the steps countdown in the UI
 	    		doCountdown();
-	    		var buttontext = e.currentTarget.text;
-	    		if (buttontext == "Start!") {
-	    			console.log("yes");
-	    			$(e.currentTarget).html("Play again?");
+
+	    		// swap out the text when someone clicks the button for the first time
+	    		if (button.html() == "Show Progress! ►") {
+	    			button.html("Play again? ►");
 	    		} else {
+	    			// reset the time when someone clicks the button to replay
 	    			currentTime = 0;
 	    		}
 	    	});
 	    }
 
+	    // this function listens for the time elapsed to match the ending time of the user's daily progress
 	    listenForTime = function() {
+	    	// poll the video to get the time elapsed
 	    	var currentTime = parseInt(ytPlayer.getCurrentTime(), 10);
 
+	    	// if the elapsed time if matching, pause the video
 	    	if (currentTime === endTime) {
 	    		ytPlayer.pauseVideo();
+	    		// clear the checker interval that is running this function
 	    		clearInterval(checker);
+	    		// reset the time in case the user wants to play the video again
 	    		currentTime = 0;
-	    		//console.log('endtime!');
 	    	}
 	    }
 
 	    function doCountdown() {
-	    	var count = 0;
-	    	var stepRate = 60 / 800;
-				var counter = setInterval(timer, stepRate); //1000 will  run it every 1 second
-				var totalSteps = <%= @ending_steps %> - <%= @starting_steps %>;
+	    	var starting_steps = <%= @starting_steps %>,
+	    		ending_steps = <%= @ending_steps %>,
+	    		// first count is for steps today
+	    		count = 0,
+	    		// second count is for steps total
+	    		count2 = starting_steps,
+	    		// we really need to figure this ratio out 
+	    		stepRate = 60 / 800,
+	    		// start the interval to update the steps in the UI
+				counter = setInterval(timer, stepRate), // 1000 will  run it every 1 second
+				// total steps math to display in the UI
+				totalSteps = ending_steps - starting_steps;
 
-				var count2 = <%= @starting_steps %>;
+			// create the countdowns, this is run in an interval
+			function timer()
+			{
+				// increment the counters each time this runs
+				count = count + 1;
+				count2 = count2 + 1;
 
-				function timer()
-				{
-				  count = count + 1;
-				  count2 = count2 + 1;
-				  // console.log(count, totalSteps);
-				  if (count >= totalSteps)
-				  {
-				     clearInterval(counter);
-				     console.log("clearing");
-				     return;
-				  }
-				  document.getElementById("timer1").innerHTML = count + " steps today";
-				  document.getElementById("timer2").innerHTML = count2 + " steps total";
+				// if the counter reaches the total step amounts, stop the timer
+				if (count >= totalSteps) {
+					// clear the interval running
+					clearInterval(counter);
+					return;
 				}
+
+				// update the html to reflect this counter for the steps
+				document.getElementById("timer1").innerHTML = count + " steps today";
+				document.getElementById("timer2").innerHTML = count2 + " steps total";
+			}
 	    }
 	    
 
 	</script>
-
 
 <% end %>
 
@@ -125,8 +168,8 @@
 
 	</div>
 
-  		<p id="timer11"></p>
-  		<p id="timer21"></p>
+  		<p id="timer1"></p>
+  		<p id="timer2"></p>
 
 	</div>
 
