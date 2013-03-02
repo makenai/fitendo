@@ -31,6 +31,9 @@
 	   		// I was going to neaten up the horrible bunch of parameters below with this object, to come soon.
 	    	settings = {};
 
+	    // upon init, this is the first time we've played
+	    firstPlay = true;
+
 	    // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
 	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0","videoDiv", "560", "460", "9", null, null, params, atts);
 
@@ -70,8 +73,9 @@
 	    		doCountdown();
 
 	    		// swap out the text when someone clicks the button for the first time
-	    		if (button.html() == "Show Progress! ►") {
+	    		if (firstPlay) {
 	    			button.html("Play again? ►");
+	    			firstPlay = false;
 	    		} else {
 	    			// reset the time when someone clicks the button to replay
 	    			currentTime = 0;
