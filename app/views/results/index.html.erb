@@ -19,10 +19,13 @@
 	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0","videoDiv", "560", "460", "9", null, null, params, atts);
 
 	    function setProgressWidth( time, elementid ) {
-				var levelTime = currentLevel.end - currentLevel.start;
-				var timeIntoLevel = time - currentLevel.start;
-				var pixelWidth = Math.ceil(( timeIntoLevel / levelTime ) * 500) + 'px';
-				document.getElementById( elementid ).style.width = pixelWidth;				
+	    	if ( currentLevel != null ) {
+					var levelTime = currentLevel.end - currentLevel.start;
+					console.log( levelTime );
+					var timeIntoLevel = time - currentLevel.start;
+					var pixelWidth = Math.ceil(( timeIntoLevel / levelTime ) * 500) + 'px';
+					document.getElementById( elementid ).style.width = pixelWidth;				
+				}
 	    }
 
 			function setCurrentLevel( time ) {
@@ -33,8 +36,11 @@
 						break;
 					}
 				}
-				setProgressWidth( time, 'pastprogress' );
-				document.getElementById('level').innerHTML = 'World ' + currentLevel.name;
+				if ( currentLevel != null ) {
+					setProgressWidth( time, 'pastprogress' );
+					setProgressWidth( time, 'todaysprogress' );				
+					document.getElementById('level').innerHTML = 'World ' + currentLevel.name;					
+				}
 				return currentLevel;
 			}
 
@@ -91,17 +97,21 @@
 	    	// poll the video to get the time elapsed
 	    	var currentTime = parseInt(ytPlayer.getCurrentTime(), 10);
 
-	    	// Update the progress bar (sorry for messy, Susan)
-	    	setProgressWidth( currentTime, 'todaysprogress' );
-
 	    	// if the elapsed time if matching, pause the video
-	    	if (currentTime === endTime) {
+	    	if (currentTime >= endTime) {
 	    		ytPlayer.pauseVideo();
 	    		// clear the checker interval that is running this function
 	    		clearInterval(checker);
 	    		// reset the time in case the user wants to play the video again
 	    		currentTime = 0;
 	    	}
+
+	    	// Update the progress bar (sorry for messy, Susan)
+	    	if ( currentLevel && currentTime > currentLevel.end ) {
+	    		setCurrentLevel( currentTime );
+	    	}
+	    	setProgressWidth( currentTime, 'todaysprogress' );
+
 	    }
 
 	    function doCountdown() {
