@@ -13,3 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require lib/swfobject/swfobject.js
+//= require timing/smb.js
