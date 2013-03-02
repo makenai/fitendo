@@ -1,21 +1,3 @@
-<!-- -------------------------------------------------------------------------------
-
-    ____ __   _                              _             
-   / ___JLJ  FJ_      ____     _ ___      ___FJ     ____   
-  J |_--'   J  _|    F __ J   J '__ J    F __  L   F __ J  
-  |  _|  FJ | |-'   | _____J  | |__| |  | |--| |  | |--| | 
-  F |_J J  LF |__-. F L___--. F L  J J  F L__J J  F L__J J 
- J__F   J__L\_____/J\______/FJ__L  J__LJ\____,__LJ\______/F
- |__|   |__|J_____F J______F |__L  J__| J____,__F J______F
-
-
- Brought to you by @makenai and @suziam, follow the project @fitendo
- Lovingly created during the first @vegasHackathon event in downtown Las Vegas 2/23/2013
- We won red pants, mission accomplished
-
--------------------------------------------------------------------------------- -->
-
-                                                           
 <% content_for :header do %>
 
 	<!-- TODO: Move this to an external file as much as possible -->
@@ -27,7 +9,8 @@
 	    	// The element id of the Flash embed
 	    	atts = { id: "ytPlayer" },
 	   		// I was going to neaten up the horrible bunch of parameters below with this object, to come soon.
-	    	settings = {};
+	    	settings = {},
+	    	currentLevel = null;
 
 	    // upon init, this is the first time we've played
 	    firstPlay = true;
@@ -35,19 +18,25 @@
 	    // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
 	    swfobject.embedSWF("http://www.youtube.com/v/" + video_id + "?version=3&enablejsapi=1&playerapiid=player1&controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1&autoplay=0","videoDiv", "560", "460", "9", null, null, params, atts);
 
+	    function setProgressWidth( time, elementid ) {
+				var levelTime = currentLevel.end - currentLevel.start;
+				var timeIntoLevel = time - currentLevel.start;
+				var pixelWidth = Math.ceil(( timeIntoLevel / levelTime ) * 500) + 'px';
+				document.getElementById( elementid ).style.width = pixelWidth;				
+	    }
+
 			function setCurrentLevel( time ) {
-				var currentLevel = null;
 				for ( var i=0; i<GAME_TIMING.length; i++ ) {
-					if ( time >= GAME_TIMING[i][0] ) {
-						currentLevel = GAME_TIMING[i][2];
+					if ( time >= GAME_TIMING[i].start ) {
+						currentLevel = GAME_TIMING[i];
 					} else {
 						break;
 					}
 				}
-				document.getElementById('level').innerHTML = 'World ' + currentLevel;
+				setProgressWidth( time, 'pastprogress' );
+				document.getElementById('level').innerHTML = 'World ' + currentLevel.name;
 				return currentLevel;
 			}
-
 
 	    // All of the other magic happens here
 	    function onYouTubePlayerReady(playerId) {
@@ -101,6 +90,9 @@
 	    listenForTime = function() {
 	    	// poll the video to get the time elapsed
 	    	var currentTime = parseInt(ytPlayer.getCurrentTime(), 10);
+
+	    	// Update the progress bar (sorry for messy, Susan)
+	    	setProgressWidth( currentTime, 'todaysprogress' );
 
 	    	// if the elapsed time if matching, pause the video
 	    	if (currentTime === endTime) {
@@ -188,13 +180,16 @@
 
 	</div>
 
-			<p id="level"></p>
   		<p id="timer1"></p>
   		<p id="timer2"></p>
 
 	</div>
 
-	
+	<div id="progressbar">
+		<p id="level"></p>
+		<div id="todaysprogress"></div>
+		<div id="pastprogress"></div>		
+	</div>
 
 </div>
 

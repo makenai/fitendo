@@ -14,7 +14,7 @@ namespace "app" do
       data = []
       File.open( file ).each_line do |line|
         start_time, end_time, level = line.chomp.split(/\s+/, 3)
-        data << [ convert_time( start_time ), convert_time( end_time ), level ]
+        data << { start: convert_time( start_time ), end: convert_time( end_time ), name: level }
       end
       File.open("app/assets/javascripts/timing/#{name}.js", 'w') do |file|
         file.puts "var GAME_TIMING = " + JSON.pretty_generate( data ) + ';'
