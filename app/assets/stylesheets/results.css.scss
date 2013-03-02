@@ -23,6 +23,33 @@ body {
 
 }
 
+#progressbar {
+	position: absolute;
+	left: 205px;
+	top: 670px;
+	width: 500px;
+	height: 50px;
+	background: url(/assets/progress.png) no-repeat 0px 0px;
+	div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 50px;
+	}
+	#pastprogress {
+		background: url(/assets/progress.png) no-repeat 0px -50px;
+	}
+	#todaysprogress {
+		background: url(/assets/progress.png) no-repeat 0px -100px;
+	}
+}
+
+#level {
+	margin-top: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+
 #tv {
 	position:absolute;
 	z-index:999;
