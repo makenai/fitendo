@@ -40,10 +40,10 @@
 	    // All of the other magic happens here
 	    function onYouTubePlayerReady(playerId) {
 	    	var titleTime = 9,
-	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400),
-	    		startTime = titleTime + stepRatio;
+	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400);    	
 
 	    	// this needs to be global for now
+	    	startTime = titleTime + stepRatio,
     		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
 
     		// get the video ready and pause it on page load
@@ -62,15 +62,15 @@
 	    		// play video from starting point
 	    		ytPlayer.playVideo();
 
+	    		// start the steps countdown in the UI
+	    		doCountdown();
+
 	    		// stop the end point checker for video, ready for another
 	    		clearInterval(window.checker);
 
 	    		// set up the checker so we know when to stop the video
 	    		// it listens for seconds elapsed
 	    		window.checker = setInterval(listenForTime, 41);
-
-	    		// start the steps countdown in the UI
-	    		doCountdown();
 
 	    		// swap out the text when someone clicks the button for the first time
 	    		if (firstPlay) {
@@ -101,16 +101,18 @@
 	    function doCountdown() {
 	    	var starting_steps = <%= @starting_steps %>,
 	    		ending_steps = <%= @ending_steps %>,
+	    		totalSteps = ending_steps - starting_steps,
+	    		totalTime = (endTime - startTime) * 1000,
+	    		stepRate = Math.ceil(totalTime / totalSteps),
 	    		// first count is for steps today
 	    		count = 0,
 	    		// second count is for steps total
 	    		count2 = starting_steps,
-	    		// we really need to figure this ratio out 
-	    		stepRate = 60 / 800,
 	    		// start the interval to update the steps in the UI
-				counter = setInterval(timer, stepRate), // 1000 will  run it every 1 second
+				counter = setInterval(timer, stepRate);
 				// total steps math to display in the UI
-				totalSteps = ending_steps - starting_steps;
+
+				console.log(totalTime, stepRate);
 
 			// create the countdowns, this is run in an interval
 			function timer()
