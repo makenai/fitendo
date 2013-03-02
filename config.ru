@@ -2,5 +2,9 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 
-use Rack::CanonicalHost, 'fitendo.net'
+p ENV['RACK_ENV']
+
+use Rack::CanonicalHost do
+  'fitendo.net' unless ENV['RACK_ENV'] == "development"
+end
 run Fitendo::Application
