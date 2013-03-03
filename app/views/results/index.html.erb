@@ -118,35 +118,38 @@
 	    	var starting_steps = <%= @starting_steps %>,
 	    		ending_steps = <%= @ending_steps %>,
 	    		totalSteps = ending_steps - starting_steps,
-	    		totalTime = (endTime - startTime) * 1000,
-	    		stepRate = Math.ceil(totalTime / totalSteps),
+	    		totalTime = endTime - startTime,
+	    		stepRate = Math.ceil(totalTime / totalSteps) * 1000,
 	    		// first count is for steps today
 	    		count = 0,
 	    		// second count is for steps total
-	    		count2 = starting_steps,
+	    		count2 = starting_steps;
 	    		// start the interval to update the steps in the UI
-				counter = setInterval(timer, stepRate);
+				//counter = setInterval(timer, stepRate);
 				// total steps math to display in the UI
 
-				console.log(totalTime, stepRate);
+				//console.log(totalTime, stepRate);
 
+				timer();
 			// create the countdowns, this is run in an interval
-			function timer()
+			function timer(stepRate)
 			{
 				// increment the counters each time this runs
 				count = count + 1;
 				count2 = count2 + 1;
 
-				// if the counter reaches the total step amounts, stop the timer
-				if (count >= totalSteps) {
-					// clear the interval running
-					clearInterval(counter);
-					return;
-				}
-
 				// update the html to reflect this counter for the steps
 				document.getElementById("timer1").innerHTML = count + " steps today";
 				document.getElementById("timer2").innerHTML = count2 + " steps total";
+
+				// if the counter reaches the total step amounts, stop the timer
+				if (count >= totalSteps) {
+					// clear the interval running
+					//clearInterval(counter);
+					return;
+				} else {
+					setTimeout(timer, stepRate);
+				}
 			}
 	    }
 	    
