@@ -49,11 +49,11 @@
 	    	var titleTime = 9,
 	    		stepRatio = Math.ceil(<%= @starting_steps %> / 400);    	
 
-				setCurrentLevel( startTime );
-
 	    	// this needs to be global for now
 	    	startTime = titleTime + stepRatio,
     		endTime = Math.ceil(titleTime + (<%= @ending_steps %> / 400));
+
+				setCurrentLevel( startTime );
 
     		// get the video ready and pause it on page load
 	    	ytPlayer.seekTo(startTime);
