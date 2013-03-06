@@ -11,23 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223213253) do
+ActiveRecord::Schema.define(:version => 20130306064312) do
 
   create_table "activities", :force => true do |t|
-    t.string   "user_id"
-    t.text     "response"
-    t.date     "for_date"
-    t.integer  "cumulative_steps"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string    "user_id"
+    t.text      "response"
+    t.date      "for_date"
+    t.integer   "cumulative_steps"
+    t.timestamp "created_at",       :null => false
+    t.timestamp "updated_at",       :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "user_id"
-    t.date     "start_date"
-    t.integer  "cumulative_steps"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string   "display_name"
+    t.string   "access_token"
+    t.string   "access_secret"
+    t.datetime "last_access"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
+
+  add_index "users", ["user_id"], :name => "index_users_on_user_id", :unique => true
 
 end

@@ -10,7 +10,15 @@ class ApplicationController < ActionController::Base
         :secret          => session[:access_secret]
       )
       @user = @fitbit.user_info['user']
-      return true if @user
+      if @user
+        User.find_or_create_by_user_id( @user['encodedId'] ).update_attributes(
+          access_token: session[:access_token],
+          access_secret: session[:access_secret],
+          display_name: @user['displayName'],
+          last_access: Time.now
+        )
+        return true
+      end
     end
     redirect_to root_url
   end
