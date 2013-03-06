@@ -3,7 +3,7 @@ class ResultsController < ApplicationController
   before_filter :require_auth
 
   def index
-    @date = params[:date] ? Date.parse( params[:date] ) : Time.zone.today
+    @date = params[:date] ? Date.parse( params[:date] ) : Time.now.in_time_zone( @user['timezone'] ).to_date rescue Time.zone.today
     if params[:refresh]
       Activity.update_activity!( @fitbit, @user, @date )
       redirect_to "/results?date=#{@date.strftime('%Y-%m-%d')}"
