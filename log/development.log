@@ -1,0 +1,191 @@
+
+
+Started GET "/" for 127.0.0.1 at 2015-01-01 17:12:26 -0800
+Connecting to database specified by database.yml
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.1ms)
+Warning. Error encountered while saving cache /Users/pawels/Projects/fitendo/tmp/cache/sass/814583318b028c199edefc663dd61f93178e399b/results.css.scssc: can't dump anonymous class #<Class:0x007fe154e9e4d0>
+
+Compiled results.css  (9ms)  (pid 42410)
+Warning. Error encountered while saving cache /Users/pawels/Projects/fitendo/tmp/cache/sass/814583318b028c199edefc663dd61f93178e399b/welcome.css.scssc: can't dump anonymous class #<Class:0x007fe154e9e4d0>
+
+Compiled welcome.css  (1ms)  (pid 42410)
+Compiled application.css  (16ms)  (pid 42410)
+Compiled jquery.js  (2ms)  (pid 42410)
+Compiled jquery_ujs.js  (21ms)  (pid 42410)
+Compiled lib/swfobject/swfobject.js  (0ms)  (pid 42410)
+Compiled timing/smb.js  (0ms)  (pid 42410)
+Compiled application.js  (37ms)  (pid 42410)
+Completed 200 OK in 80ms (Views: 80.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-01-01 17:12:26 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-01-01 17:12:26 -0800
+Served asset /application.css - 200 OK (2ms)
+
+
+Started GET "/assets/results.css?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /results.css - 200 OK (1ms)
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /welcome.css - 200 OK (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /jquery.js - 200 OK (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/lib/swfobject/swfobject.js?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /lib/swfobject/swfobject.js - 200 OK (2ms)
+
+
+Started GET "/assets/timing/smb.js?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /timing/smb.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /application.js - 200 OK (28ms)
+
+
+Started GET "/assets/fitendo.png" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /fitendo.png - 200 OK (2ms)
+
+
+Started GET "/assets/fitbitlogin.png" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /fitbitlogin.png - 200 OK (2ms)
+
+
+Started GET "/assets/favicon.png" for 127.0.0.1 at 2015-01-01 17:12:27 -0800
+Served asset /favicon.png - 200 OK (2ms)
+
+
+Started GET "/auth" for 127.0.0.1 at 2015-01-01 17:12:28 -0800
+Processing by WelcomeController#auth as HTML
+Redirected to http://www.fitbit.com/oauth/authorize?oauth_token=c90a187cd060c6a94befdcf46962bb5a
+Completed 302 Found in 656ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/callback?oauth_token=c90a187cd060c6a94befdcf46962bb5a&oauth_verifier=hlmmlt5s565mjg6526sf2rco23" for 127.0.0.1 at 2015-01-01 17:12:44 -0800
+Processing by WelcomeController#callback as HTML
+  Parameters: {"oauth_token"=>"c90a187cd060c6a94befdcf46962bb5a", "oauth_verifier"=>"hlmmlt5s565mjg6526sf2rco23"}
+Redirected to http://localhost:3000/results
+Completed 302 Found in 552ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/results" for 127.0.0.1 at 2015-01-01 17:12:45 -0800
+Processing by ResultsController#index as HTML
+Completed 500 Internal Server Error in 2997ms
+
+ActiveRecord::StatementInvalid (Could not find table 'users'):
+  app/controllers/application_controller.rb:14:in `require_auth'
+
+
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /Library/Ruby/Gems/2.0.0/gems/actionpack-3.2.12/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (7.2ms)
+Connecting to database specified by database.yml
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateActivities (20130223201216)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "activities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "response" text, "for_date" date, "cumulative_steps" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130223201216')[0m
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateUsers (20130223213253)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "start_date" date, "cumulative_steps" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130223213253')[0m
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to StoreUserInfo (20130306064312)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "users"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "display_name" varchar(255), "access_token" varchar(255), "access_secret" varchar(255), "last_access" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_user_id" ON "users" ("user_id")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130306064312')[0m
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-01-01 17:13:20 -0800
+Connecting to database specified by database.yml
+Processing by WelcomeController#index as HTML
+Redirected to http://localhost:3000/results
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/results" for 127.0.0.1 at 2015-01-01 17:13:20 -0800
+Processing by ResultsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."user_id" = '225CGJ' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (22.4ms)[0m  [1mINSERT INTO "users" ("access_secret", "access_token", "created_at", "display_name", "last_access", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["access_secret", nil], ["access_token", nil], ["created_at", Thu, 01 Jan 2015 17:13:20 PST -08:00], ["display_name", nil], ["last_access", nil], ["updated_at", Thu, 01 Jan 2015 17:13:20 PST -08:00], ["user_id", "225CGJ"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  UPDATE "users" SET "access_token" = 'c630fd2ec5fbabe446bdb1fb7638aa25', "access_secret" = 'b935f86eb5d0bf996c48894c026ab8c7', "display_name" = 'Pawel', "last_access" = '2015-01-02 01:13:20.904497', "updated_at" = '2015-01-02 01:13:20.905826' WHERE "users"."id" = 1
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActivity Load (0.1ms)[0m  SELECT "activities".* FROM "activities" WHERE (user_id = '225CGJ' AND for_date < '2015-01-01') ORDER BY for_date DESC LIMIT 1
+  [1m[36mActivity Load (0.1ms)[0m  [1mSELECT "activities".* FROM "activities" WHERE (user_id = '225CGJ' AND for_date > '2015-01-01') ORDER BY for_date ASC LIMIT 1[0m
+  [1m[35mActivity Load (0.1ms)[0m  SELECT "activities".* FROM "activities" WHERE (user_id = '225CGJ' AND for_date = '2015-01-01' AND updated_at > '2015-01-02 00:43:20.913743') LIMIT 1
+  [1m[36mActivity Load (0.2ms)[0m  [1mSELECT "activities".* FROM "activities" WHERE "activities"."user_id" = '225CGJ' AND "activities"."for_date" = '2015-01-01' LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "activities".* FROM "activities" WHERE (user_id = '225CGJ' AND for_date < '2015-01-01') ORDER BY for_date DESC LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "activities" ("created_at", "cumulative_steps", "for_date", "response", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Thu, 01 Jan 2015 17:13:21 PST -08:00], ["cumulative_steps", 0], ["for_date", Thu, 01 Jan 2015], ["response", "{\"activities\":[],\"goals\":{\"activeMinutes\":30,\"caloriesOut\":3521,\"distance\":5,\"floors\":10,\"steps\":10000},\"summary\":{\"activeScore\":-1,\"activityCalories\":0,\"caloriesBMR\":1509,\"caloriesOut\":1509,\"distances\":[{\"activity\":\"total\",\"distance\":0},{\"activity\":\"tracker\",\"distance\":0},{\"activity\":\"loggedActivities\",\"distance\":0},{\"activity\":\"veryActive\",\"distance\":0},{\"activity\":\"moderatelyActive\",\"distance\":0},{\"activity\":\"lightlyActive\",\"distance\":0},{\"activity\":\"sedentaryActive\",\"distance\":0}],\"elevation\":0,\"fairlyActiveMinutes\":0,\"floors\":0,\"lightlyActiveMinutes\":0,\"marginalCalories\":0,\"sedentaryMinutes\":1033,\"steps\":0,\"veryActiveMinutes\":0}}"], ["updated_at", Thu, 01 Jan 2015 17:13:21 PST -08:00], ["user_id", "225CGJ"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActivity Load (0.2ms)[0m  SELECT "activities".* FROM "activities" WHERE (user_id = '225CGJ' AND for_date < '2015-01-01') ORDER BY for_date DESC LIMIT 1
+  Rendered results/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 1047ms (Views: 14.4ms | ActiveRecord: 29.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /application.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/results.css?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /results.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lib/swfobject/swfobject.js?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /lib/swfobject/swfobject.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /jquery_ujs.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/welcome.css?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /welcome.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/timing/smb.js?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /timing/smb.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /application.js - 304 Not Modified (27ms)
+
+
+Started GET "/assets/tv.png" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /tv.png - 200 OK (4ms)
+
+
+Started GET "/assets/fitendo.png" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /fitendo.png - 304 Not Modified (0ms)
+
+
+Started GET "/assets/progress.png" for 127.0.0.1 at 2015-01-01 17:13:21 -0800
+Served asset /progress.png - 200 OK (2ms)
